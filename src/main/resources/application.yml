@@ -1,0 +1,35 @@
+spring:
+#
+#  jpa:
+#    database: mysql
+#    show-sql: true
+#    hibernate:
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#  datasource:
+#    url: jdbc:mysql://47.94.175.162:3306/blog
+#    username: root
+#    password: rongle@0410
+#    driver-class-name: com.mysql.jdbc.Driver
+#    max-idle: 10
+#    max-wait: 10000
+#    min-idle: 5
+#    initial-size: 5
+
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+  freemarker:
+    allow-request-override: false
+    cache: false
+    check-template-location: true
+    charset: UTF-8
+    content-type: text/html; charset=utf-8
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+    suffix: .ftl
+    template-loader-path: classpath:/templates
+server:
+  port: 8000
