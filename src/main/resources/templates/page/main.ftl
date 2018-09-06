@@ -217,7 +217,7 @@
 						<div class="layui-timeline-content layui-text">
 							<div class="layui-timeline-title">
 								<h3 class="layui-inline">layuiCMS V1.0正式与大家见面，提供了一些简单功能　</h3>
-								<span class="layui-badge-rim">2017-06-21</span>
+								<span class="layui-badge-rim">2018-01-21</span>
 							</div>
 						</div>
 					</li>

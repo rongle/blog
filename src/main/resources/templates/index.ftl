@@ -57,7 +57,7 @@
 						<a href="javascript:;"><i class="seraph icon-lock"></i><cite>锁屏</cite></a>
 					</li>
 					<li class="layui-nav-item" id="userInfo">
-						<a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">玖昇</cite></a>
+						<a href="javascript:;"><img src="images/face.jpg" class="layui-nav-img userAvatar" width="35" height="35"><cite class="adminName">${username!}</cite></a>
 						<dl class="layui-nav-child">
 							<dd><a href="javascript:;" data-url="userInfo"><i class="seraph icon-ziliao" data-icon="icon-ziliao"></i><cite>个人资料</cite></a></dd>
 							<dd><a href="javascript:;" data-url="changePwd"><i class="seraph icon-xiugai" data-icon="icon-xiugai"></i><cite>修改密码</cite></a></dd>
@@ -74,7 +74,7 @@
 		<div class="layui-side layui-bg-black">
 			<div class="user-photo">
 				<a class="img" title="我的头像" ><img src="images/face.jpg" class="userAvatar"></a>
-				<p>你好！<span class="userName">玖昇</span>, 欢迎登录</p>
+				<p>你好！<span class="userName">${username!}</span>, 欢迎登录</p>
 			</div>
 			<!-- 搜索 -->
 			<div class="layui-form component">
@@ -118,7 +118,7 @@
 		</div>
 		<!-- 底部 -->
 		<div class="layui-footer footer">
-			<p><span>copyright @2018 玖昇</span></p>
+			<p><span>copyright @2018 ${username!}</span></p>
 		</div>
 	</div>
 

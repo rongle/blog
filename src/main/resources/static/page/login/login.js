@@ -7,9 +7,21 @@ layui.use(['form','layer','jquery'],function(){
     //登录按钮
     form.on("submit(login)",function(data){
         $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
-        setTimeout(function(){
-            window.location.href = "/cms";
-        },1000);
+
+
+        $.ajax({
+            url: '/admin/login',
+            type: 'post',
+            data: {userName: data.field.userName, userPassword: data.field.userPassword},
+            dataType: 'json',
+            success: function (res) {
+
+                setTimeout(function(res){
+                    window.location.href='/index';
+                },1000);
+            }
+        })
+
         return false;
     })
 

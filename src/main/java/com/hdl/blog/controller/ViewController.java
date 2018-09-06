@@ -1,13 +1,21 @@
 package com.hdl.blog.controller;
 
+import com.hdl.blog.config.WebSecurityConfig;
+import com.hdl.blog.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 @Controller
 public class ViewController {
 
-    @GetMapping("/")
-    public String index(){
+    @GetMapping("/index")
+    public String index(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username, Map map){
+        map.put("username", username);
         return "index";
     }
 
@@ -36,12 +44,10 @@ public class ViewController {
         return "page/img/images";
     }
 
-
     @GetMapping("404")
     public String error(){
         return "page/404";
     }
-
 
     @GetMapping("userList")
     public String userList(){
@@ -73,30 +79,25 @@ public class ViewController {
         return "page/systemSetting/basicParameter";
     }
 
-
     @GetMapping("logs")
     public String logs(){
         return "page/systemSetting/logs";
     }
-
 
     @GetMapping("linkList")
     public String linkList(){
         return "page/systemSetting/linkList";
     }
 
-
     @GetMapping("icons")
     public String icons(){
         return "page/systemSetting/icons";
     }
 
-
     @GetMapping("linksAdd")
     public String linksAdd(){
         return "page/systemSetting/linksAdd";
     }
-
 
     @GetMapping("addressDoc")
     public String addressDoc(){
@@ -112,8 +113,6 @@ public class ViewController {
     public String navDoc(){
         return "page/doc/navDoc";
     }
-
-
 
 //
 //    @GetMapping("")

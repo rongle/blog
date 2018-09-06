@@ -1,1 +1,1 @@
-delete from address
+select * from user t where t.user_name = :name and t.user_password='dfsf';
