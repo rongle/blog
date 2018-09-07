@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/article")
+@RequestMapping("/api/article")
 @CrossOrigin
 public class ArticleController {
 

@@ -6,8 +6,8 @@ layui.use(['form','layer','jquery'],function(){
 
     //登录按钮
     form.on("submit(login)",function(data){
+        var self = this
         $(this).text("登录中...").attr("disabled","disabled").addClass("layui-disabled");
-
 
         $.ajax({
             url: '/admin/login',
@@ -15,12 +15,20 @@ layui.use(['form','layer','jquery'],function(){
             data: {userName: data.field.userName, userPassword: data.field.userPassword},
             dataType: 'json',
             success: function (res) {
+                if (res.data != null) {
 
-                setTimeout(function(res){
-                    window.location.href='/index';
-                },1000);
+                    setTimeout(function(res){
+                        window.location.href='/index';
+                    },1000);
+                } else {
+                    layer.alert("用户名或密码错误")
+                    $(self).text("登录").attr("disabled", false).removeClass("layui-disabled")
+
+                }
             }
         })
+
+
 
         return false;
     })

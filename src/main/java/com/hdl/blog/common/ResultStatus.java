@@ -120,6 +120,7 @@ public enum ResultStatus {
         return "errorCode not defined ";
     }
 
+
     public int getErrorCode(){
         return code;
     }
