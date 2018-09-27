@@ -56,8 +56,9 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Page<Article> findArticleListBypage(Integer page, Integer limit) {
-        Sort sort = new Sort(Sort.Direction.DESC,"articleCreatedtime");
-        Pageable pageable = PageRequest.of(page, limit, sort);
+        //Sort sort = new Sort(Sort.Direction.DESC,"articleId");
+        //Pageable pageable = PageRequest.of(page, limit, sort);
+        Pageable pageable = PageRequest.of(page, limit);
         return articleRepository.findAll(pageable);
     }
 

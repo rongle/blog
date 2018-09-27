@@ -16,4 +16,7 @@ public interface ArticleRepository  extends JpaRepository<Article, String>, JpaS
     @Query(value = "delete * from article a where a.title like CONCAT('%',:articleTitle,'%')", nativeQuery = true)
     void deleteByTitle(@Param("articleTitle") String articleTitle);
 
+    @Query(value = "select count(article0_.article_id) as col_0_0_ from article article0", nativeQuery = true)
+    Integer totalArticles();
+
 }

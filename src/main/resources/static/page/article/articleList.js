@@ -6,49 +6,33 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //新闻列表
+    //文章列表
     var tableIns = table.render({
-        elem: '#newsList',
-        //url : 'json/newsList.json',
-        url: 'articleList',
+        elem: '#articleList',
+        url: 'api/article/articleList',
         cellMinWidth: 95,
         page: true,
         height: "full-125",
         limit: 10,
         limits: [10, 15, 20, 25],
-        id: "newsListTable",
-        // cols : [[
-        //     {type: "checkbox", fixed:"left", width:50},
-        //     {field: 'id', title: 'ID', width:60, align:"center"},
-        //     {field: 'title', title: '文章标题', width:350},
-        //     {field: 'newsAuthor', title: '发布者', align:'center'},
-        //     {field: 'newsStatus', title: '发布状态',  align:'center',templet:"#newsStatus"},
-        //     {field: 'newsLook', title: '浏览权限', align:'center'},
-        //     {field: 'newsTop', title: '是否置顶', align:'center', templet:function(d){
-        //         return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" '+d.newsTop+'>'
-        //     }},
-        //     {field: 'newsTime', title: '发布时间', align:'center', minWidth:110, templet:function(d){
-        //         return d.newsTime.substring(0,10);
-        //     }},
-        //     {title: '操作', width:170, templet:'#newsListBar',fixed:"right",align:"center"}
-        // ]]
+        id: "articleListTable",
         cols: [[
             {type: "checkbox", fixed: "left", width: 50},
-            {field: 'id', title: 'ID', width: 60, align: "center"},
-            {field: 'title', title: '文章标题', width: 350},
-            {field: 'newsAuthor', title: '发布者', align: 'center'},
-            {field: 'newsStatus', title: '发布状态', align: 'center', templet: "#newsStatus"},
-            {field: 'newsTop', title: '是否置顶', align: 'center', templet: function (d) {
-                return '<input type="checkbox" name="newsTop" lay-filter="newsTop" lay-skin="switch" lay-text="是|否" ' + d.newsTop + '>'
+            {field: 'articleId', title: 'ID', width: 60, align: "center"},
+            {field: 'articleTitle', title: '文章标题', width: 350},
+            {field: 'articleAuthor', title: '作者', align: 'center'},
+            {field: 'articleStatus', title: '文章状态', align: 'center', templet: "#articleStatus"},
+            {field: 'articleTop', title: '是否置顶', align: 'center', templet: function (d) {
+                return '<input type="checkbox" name="articleTop" lay-filter="articleTop" lay-skin="switch" lay-text="是|否" ' + d.articleTop + '>'
                 }
             },
-            {field: 'createdAt', title: '创建时间', width: 350},
-            {title: '操作', width: 170, templet: '#newsListBar', fixed: "right", align: "center"}
+            {field: 'articleCreatedtime', title: '创建时间', width: 350},
+            {title: '操作', width: 170, templet: '#articleListBar', fixed: "right", align: "center"}
         ]]
     });
 
     //是否置顶
-    form.on('switch(newsTop)', function (data) {
+    form.on('switch(articleTop)', function (data) {
         var index = layer.msg('修改中，请稍候', {icon: 16, time: false, shade: 0.8});
         setTimeout(function () {
             layer.close(index);
@@ -63,7 +47,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
     //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
     $(".search_btn").on("click", function () {
         if ($(".searchVal").val() != '') {
-            table.reload("newsListTable", {
+            table.reload("articleListTable", {
                 page: {
                     curr: 1 //重新从第 1 页开始
                 },
@@ -81,11 +65,11 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
         var index = layui.layer.open({
             title: "添加文章",
             type: 2,
-            content: "newsAdd",
+            content: "api/article/addArticle",
             success: function (layero, index) {
                 var body = layui.layer.getChildFrame('body', index);
                 if (edit) {
-                    body.find(".newsName").val(edit.newsName);
+                    body.find(".articleTitle").val(edit.articleTitle);
                     body.find(".abstract").val(edit.abstract);
                     body.find(".thumbImg").attr("src", edit.newsImg);
                     body.find("#news_content").val(edit.content);
@@ -114,7 +98,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
 
     //批量删除
     $(".delAll_btn").click(function () {
-        var checkStatus = table.checkStatus('newsListTable'),
+        var checkStatus = table.checkStatus('articleListTable'),
             data = checkStatus.data,
             id = [];
         if (data.length > 0) {
@@ -135,7 +119,7 @@ layui.use(['form', 'layer', 'laydate', 'table', 'laytpl'], function () {
     })
 
     //列表操作
-    table.on('tool(newsList)', function (obj) {
+    table.on('tool(articleList)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
 

@@ -2,10 +2,7 @@ package com.hdl.blog.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Configuration
+//@EnableWebMvc
 public class WebSecurityConfig implements WebMvcConfigurer {
 
     public final static String SESSION_KEY = "user";
@@ -23,10 +21,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
     }
 
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/").addResourceLocations("classpath:/static/");
-    }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
+//        registry.addResourceHandler("/js/**").addResourceLocations("/js/");
+//        registry.addResourceHandler("/images/**").addResourceLocations("/images/");
+//
+//    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -35,7 +36,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         // 排除配置
         addInterceptor.excludePathPatterns("/admin/**");
         addInterceptor.excludePathPatterns("/login");
-        addInterceptor.excludePathPatterns("/page/**");
+        addInterceptor.excludePathPatterns("/getCode");
+
+        addInterceptor.excludePathPatterns("/**/*.css");
+        addInterceptor.excludePathPatterns("/**/*.js");
+        addInterceptor.excludePathPatterns("/**/*.json");
+        addInterceptor.excludePathPatterns("/**/*.jpg");
+        addInterceptor.excludePathPatterns("/**/*.png");
+
 
         // 拦截配置
         addInterceptor.addPathPatterns("/**");

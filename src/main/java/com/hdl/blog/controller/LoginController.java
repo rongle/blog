@@ -33,19 +33,18 @@ public class LoginController {
 
     @PostMapping("/login")
     @ResponseBody
-    public JsonResult admin(HttpServletRequest request, HttpSession session, String userName, String userPassword) throws Exception {
+    public JsonResult admin(HttpServletRequest request, HttpSession session, String userName, String userPassword, String verCode) throws Exception {
         JsonResult jsonResult = new JsonResult();
 //        User userImpl = userService.getUser(user.getUserName(), user.getUserPassword());
         User userImpl = userService.getUser(userName, userPassword);
 
 
-        //String verCodeInput = request.getParameter("verCode");
-        String verCode = request.getSession().getAttribute("verCode").toString();
+        String sverCode = request.getSession().getAttribute("verCode").toString();
 
-        if (userImpl != null){
-//            if (verCodeInput != verCode){
-//                return jsonResult.success(userImpl, "验证码错误");
-//            }
+
+        if (!verCode.equals(sverCode)){
+            return jsonResult.success("验证码错误");
+        } else if (userImpl != null) {
             session.setAttribute(WebSecurityConfig.SESSION_KEY, userName);
             return jsonResult.success(userImpl);
         }

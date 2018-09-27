@@ -12,15 +12,17 @@ layui.use(['form','layer','jquery'],function(){
         $.ajax({
             url: '/admin/login',
             type: 'post',
-            data: {userName: data.field.userName, userPassword: data.field.userPassword},
+            data: {userName: data.field.userName, userPassword: data.field.userPassword, verCode: data.field.verCode},
             dataType: 'json',
             success: function (res) {
                 if (res.data != null) {
-
-                    setTimeout(function(res){
-                        window.location.href='/index';
-                    },1000);
-                } else {
+                    setTimeout(function (res) {
+                        window.location.href = '/index';
+                    }, 1000);
+                } else if (res.message == "验证码错误") {
+                    layer.alert("验证码错误")
+                    $(self).text("登录").attr("disabled", false).removeClass("layui-disabled")
+                }else {
                     layer.alert("用户名或密码错误")
                     $(self).text("登录").attr("disabled", false).removeClass("layui-disabled")
 

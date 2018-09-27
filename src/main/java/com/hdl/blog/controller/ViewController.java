@@ -3,6 +3,7 @@ package com.hdl.blog.controller;
 import com.hdl.blog.config.WebSecurityConfig;
 import com.hdl.blog.entity.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.Map;
 
 @Controller
+@CrossOrigin
 public class ViewController {
 
     @GetMapping("/index")
@@ -29,14 +31,14 @@ public class ViewController {
         return "page/main";
     }
 
-    @GetMapping("newsList")
+    @GetMapping("articleList")
     public String newsList(){
-        return "page/news/newsList";
+        return "page/article/articleList";
     }
 
-    @GetMapping("newsAdd")
+    @GetMapping("articleAdd")
     public String newsAdd(){
-        return "page/news/newsAdd";
+        return "page/article/articleAdd";
     }
 
     @GetMapping("images")

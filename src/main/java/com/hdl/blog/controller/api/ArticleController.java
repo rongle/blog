@@ -4,6 +4,7 @@ import com.hdl.blog.common.JsonResult;
 import com.hdl.blog.entity.Article;
 import com.hdl.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -18,6 +19,15 @@ public class ArticleController {
 
     @Autowired
     private ArticleService articleService;
+
+
+    @GetMapping("articleList")
+    @ResponseBody
+    public JsonResult articleList(Integer page, Integer limit){
+        Page articleListBypage = articleService.findArticleListBypage(page, limit);
+        List<Article> articleList = articleListBypage.getContent();
+        return jsonResult.success(articleList);
+    }
 
     @PostMapping("/addArticle")
     @ResponseBody

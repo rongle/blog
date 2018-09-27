@@ -66,4 +66,19 @@ public class JsonResult<T> {
         jsonResult.setData(data);
         return jsonResult;
     }
+
+    public JsonResult<T> success(T data, String message){
+        JsonResult<T> jsonResult = new JsonResult<>();
+        jsonResult.setCode(ResultStatus.SUCCESS.getErrorCode());
+        jsonResult.setMessage(message);
+        jsonResult.setData(data);
+        return jsonResult;
+    }
+
+    public JsonResult<T> success(String message){
+        JsonResult<T> jsonResult = new JsonResult<>();
+        jsonResult.setCode(ResultStatus.SUCCESS.getErrorCode());
+        jsonResult.setMessage(message);
+        return jsonResult;
+    }
 }

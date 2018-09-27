@@ -26,8 +26,8 @@
 		</div>
 		<div class="layui-form-item input-item" id="imgCode">
 			<label for="code">验证码</label>
-			<input type="text" placeholder="请输入验证码" autocomplete="off" id="code" class="layui-input">
-			<img src="images/code.jpg">
+			<input type="text" placeholder="请输入验证码" autocomplete="off" id="verCode" name="verCode" class="layui-input"  lay-verify="required">
+			<img id="img" src="http://localhost:8080/getCode" onclick="changeImg()">
 		</div>
 		<div class="layui-form-item">
 			<button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
@@ -38,6 +38,14 @@
 			<a href="javascript:;" class="seraph icon-sina layui-col-xs4 layui-col-sm4 layui-col-md4 layui-col-lg4"></a>
 		</div>
 	</form>
+
+    <script type="text/javascript">
+        function changeImg(){
+            var img = document.getElementById("img");
+            img.src = "http://localhost:8080/getCode?date=" + new Date();;
+        }
+    </script>
+
 	<script type="text/javascript" src="layui/layui.js"></script>
 	<script type="text/javascript" src="page/login/login.js"></script>
 	<script type="text/javascript" src="js/cache.js"></script>
